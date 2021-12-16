@@ -1076,7 +1076,7 @@ db_log_verify: db_log_verify@o@ util_cache@o@ util_sig@o@ $(DEF_LIB)
 # Library and standard utilities install.
 ##################################################
 library_install: install_setup
-library_install: install_include install_lib install_utilities install_docs
+library_install: install_include install_lib install_utilities
 
 uninstall: uninstall_include uninstall_lib uninstall_utilities uninstall_docs
 
@@ -1159,14 +1159,6 @@ uninstall_utilities:
 DOCLIST=api_reference articles bdb-sql collections csharp \
 	gsg gsg_db_rep gsg_txn index.html installation java \
 	license porting programmer_reference upgrading
-
-install_docs:
-	@echo "Installing documentation: $(DESTDIR)$(docdir) ..."
-	@test -d $(DESTDIR)$(docdir) || \
-	    ($(MKDIR) -p $(DESTDIR)$(docdir) && \
-	    $(CHMOD) $(dmode) $(DESTDIR)$(docdir))
-	@cd $(DESTDIR)$(docdir) && $(RM) -r $(DOCLIST)
-	@cd $(topdir)/docs && $(CP) -pr $(DOCLIST) $(DESTDIR)$(docdir)/
 
 uninstall_docs:
 	@cd $(DESTDIR)$(docdir) && $(RM) -r $(DOCLIST)
